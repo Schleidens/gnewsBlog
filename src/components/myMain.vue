@@ -2,12 +2,11 @@
 <div>
   <b-container>
     <div class="row">
-      <div class="col-lg-3 col-md-4 col-sm-6 col-xs-1 mb-3" v-for="article in articles" :key="article">
+      <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-3" v-for="article in articles" :key="article.id">
         <b-card
         no-body
-    style="max-width: 20rem;"
-    :img-src="articles.image"
-    img-alt="Image"
+    :img-src="article.image"
+    img-alt="gNews"
     img-top
     v-if="article"
     >
@@ -22,7 +21,7 @@
             </b-card-body>
 
             <template v-slot:footer>
-                <small class="text-muted">{{article.date}}</small>
+                <small class="text-muted"><a :href="article.url">read more</a></small>
             </template>
         </b-card>
       </div>
@@ -37,15 +36,15 @@
 <script>
 import axios from 'axios'
 export default {
-  name: 'HelloWorld',
+  name: 'myMain',
 
   data(){
     return{
       articles: {
+        image: '',
         title: '',
         description: '',
-        date: '',
-        image: ''
+        url: ''
       },
       printError: "",
     }
@@ -57,10 +56,10 @@ export default {
     axios.get(`https://gnews.io/api/v3/search?q=technology&token=${apiKey}`)
       .then(response => {
         this.articles = response.data.articles;
+        this.articles.image = response.data.articles.image;
         this.articles.title = response.data.articles.title;
         this.articles.description = response.data.articles.description;
-        this.articles.date = response.data.articles.publishedAt;
-        this.articles.image = response.data.articles.image;
+        this.articles.url = response.data.articles.url;        
         console.log(response.data.articles);
       })
       .catch(error => {

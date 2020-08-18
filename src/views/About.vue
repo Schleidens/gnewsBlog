@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <p>
-      Après avoir appris {{vuejs}}, j'ai decider de faire ce petit projet
+      Après avoir appris {{vuejs}}, j'ai décidé de faire ce petit projet
        un peu cool si vous trouvez &#128521; . il n'y aura pas trop de mise à 
        jour car ce n'est pas un projet à long terme, je voulais juste m'amuser.
        <br>
